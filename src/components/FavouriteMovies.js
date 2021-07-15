@@ -27,13 +27,26 @@ const FavouriteMovies = () => {
 
   const base_url = "https://image.tmdb.org/t/p/original/";
 
+  const Loader = () => {
+    return (
+      <div className="text-center">
+        <div className="spinner-border" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div>
       <div className="row d-flex align-items-center mt-4 mb-4 justify-content-center">
         <MovieListHeading heading="Favourites Movies" />
       </div>
       <div className="row mt-3">
-        {favourites.length ? (
+        {favourites === undefined || favourites.length === 0 ? (
+          <Loader />
+        ) : null}
+        {favourites.length > 0 ? (
           favourites.map((movie, index) => (
             <div
               className="image-container d-flex justify-content-start m-3"
