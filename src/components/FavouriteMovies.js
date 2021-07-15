@@ -4,7 +4,7 @@ import RemoveFavourite from "./RemoveFavourite";
 import "./MovieList.css";
 
 const FavouriteMovies = () => {
-  const [favourites, setFavourites] = useState("");
+  const [favourites, setFavourites] = useState([]);
   console.log(favourites);
   useEffect(() => {
     const movieFavourites = JSON.parse(
