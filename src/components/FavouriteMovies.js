@@ -5,7 +5,7 @@ import "./MovieList.css";
 
 const FavouriteMovies = () => {
   const [favourites, setFavourites] = useState([]);
-  console.log(favourites);
+
   useEffect(() => {
     const movieFavourites = JSON.parse(
       localStorage.getItem("favourites-movies")
@@ -27,26 +27,13 @@ const FavouriteMovies = () => {
 
   const base_url = "https://image.tmdb.org/t/p/original/";
 
-  const Loader = () => {
-    return (
-      <div className="text-center">
-        <div className="spinner-border" role="status">
-          <span className="sr-only">Loading...</span>
-        </div>
-      </div>
-    );
-  };
-
   return (
     <div>
       <div className="row d-flex align-items-center mt-4 mb-4 justify-content-center">
         <MovieListHeading heading="Favourites Movies" />
       </div>
       <div className="row mt-3">
-        {favourites === undefined || favourites.length === 0 ? (
-          <Loader />
-        ) : null}
-        {favourites.length > 0 ? (
+        {favourites.length ? (
           favourites.map((movie, index) => (
             <div
               className="image-container d-flex justify-content-start m-3"
@@ -67,7 +54,7 @@ const FavouriteMovies = () => {
           ))
         ) : (
           <small className=" h-100 d-flex justify-content-center align-items-center ">
-            Note: right no there is no favourite movies
+            Note: right no there is no favourite movies please try to add
           </small>
         )}
       </div>
