@@ -5,7 +5,7 @@ import "./MovieList.css";
 
 const FavouriteMovies = () => {
   const [favourites, setFavourites] = useState("");
-
+  console.log(favourites);
   useEffect(() => {
     const movieFavourites = JSON.parse(
       localStorage.getItem("favourites-movies")
@@ -33,26 +33,30 @@ const FavouriteMovies = () => {
         <MovieListHeading heading="Favourites Movies" />
       </div>
       <div className="row mt-3">
-        {favourites
-          ? favourites.map((movie, index) => (
-              <div
-                className="image-container d-flex justify-content-start m-3"
-                key={movie.id}
+        {favourites.length ? (
+          favourites.map((movie, index) => (
+            <div
+              className="image-container d-flex justify-content-start m-3"
+              key={movie.id}
+            >
+              <img
+                className="row_poster"
+                src={`${base_url}${movie.poster_path}`}
+                alt="movie"
+              />
+              <span
+                onClick={() => removeFavouriteMovie(movie)}
+                className="overlay d-flex align-item-center justify-content-center"
               >
-                <img
-                  className="row_poster"
-                  src={`${base_url}${movie.poster_path}`}
-                  alt="movie"
-                />
-                <span
-                  onClick={() => removeFavouriteMovie(movie)}
-                  className="overlay d-flex align-item-center justify-content-center"
-                >
-                  <RemoveFavourite />
-                </span>
-              </div>
-            ))
-          : null}
+                <RemoveFavourite />
+              </span>
+            </div>
+          ))
+        ) : (
+          <small className=" h-100 d-flex justify-content-center align-items-center ">
+            Note: right no there is no favourite movies
+          </small>
+        )}
       </div>
     </div>
   );
